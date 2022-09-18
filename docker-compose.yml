@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  app:
+    container_name: ${APP_NAME}-app
+    build: ./docker
+    ports:
+      - "8000:80"
+    volumes:
+      - ./app:/usr/share/nginx/html
+  postgres:
+    container_name: ${APP_NAME}-db
+    image: postgres:13-alpine
+    command: ["postgres", "-c", "fsync=false", "-c", "full_page_writes=off"]
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
