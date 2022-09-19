@@ -4,9 +4,10 @@ services:
     container_name: ${APP_NAME}-app
     build: ./docker
     ports:
-      - "8000:80"
+      - "8100:8100"
+    command: ["/usr/local/bin/ionic", "serve", "--no-open", "--external"]
     volumes:
-      - ./app:/usr/share/nginx/html
+      - .:/app
   postgres:
     container_name: ${APP_NAME}-db
     image: postgres:13-alpine
@@ -15,5 +16,6 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
+      - .:/app
     ports:
       - "5433:5432"
