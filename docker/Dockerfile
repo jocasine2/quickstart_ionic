@@ -2,6 +2,7 @@ FROM nginx:alpine
 RUN apk update && apk add bash
 RUN apk add --update nodejs npm
 RUN npm install -g @ionic/cli
+RUN npm install -g @angular/cli
 WORKDIR /app/myapp
 
 
